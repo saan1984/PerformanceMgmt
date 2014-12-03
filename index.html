@@ -1,18 +1,51 @@
 <!DOCTYPE html>
-<html ng-app="profileApp">
+<html ng-app="perfApp">
 <head lang="en">
     <meta charset="UTF-8">
     <title>Performance management</title>
     <link rel="stylesheet" href="assets/lib/bootstrap/bootstrap.min.css">
 </head>
-<body>
+<body ng-controller="MainController">
+    <ng-include src="'assets/template/page/headerTemplate.html'">
+    </ng-include>
     <div ng-view=""></div>
+
+    <script type="text/ng-template" id="goalModalContent.html">
+        <div class="modal-header">
+            <h3 class="modal-title">Create New Goal</h3>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <input type="text" ng-model="goalName" class="form-control" placeholder="Enter your goal">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" datepicker-popup="yyyy/MM/dd" ng-model="goalStartTime"
+                       placeholder="Enter start time"
+                       is-open="sopened"  datepicker-options="dateOptions" ng-click="openStartTime($event)"
+                       date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" datepicker-popup="yyyy/MM/dd" ng-model="goalEndTime"
+                       placeholder="Enter end time"
+                       is-open="eopened"  datepicker-options="dateOptions" ng-click="openEndTime($event)"
+                       date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+            </div>
+            <div class="form-group">
+                <textarea ng-model="goalDescription" class="form-control" placeholder="Enter description"></textarea>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="ok()">OK</button>
+            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+        </div>
+    </script>
     <script src="assets/lib/angular/angular.min.js"></script>
     <script src="assets/lib/angular/angular-route.min.js"></script>
     <script src="assets/lib/angular/angular-resource.min.js"></script>
     <script src="assets/lib/angular/angular-sanitize.min.js"></script>
     <script src="assets/lib/angular/angular-messages.min.js"></script>
     <script src="assets/lib/bootstrap/ui-bootstrap-tpls-0.12.0.min.js"></script>
+    <script src="assets/script/controller/perfController.js"></script>
     <script src="assets/script/directive/performanceDirective.js"></script>
     <script src="assets/script/app.js"></script>
 </body>

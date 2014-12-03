@@ -1,18 +1,19 @@
 /**
  * Created by I306335 on 12/2/2014.
  */
-var profileApp= angular.module("profileApp", [
+var profileApp= angular.module("perfApp", [
     "ngResource",
     "ngRoute",
     "ngSanitize",
     "ngMessages",
     "ui.bootstrap",
-    "profileApp.directive"
+    "perfApp.controller",
+    "perfApp.directive"
 ]);
 
 profileApp.config(function($routeProvider) {
     $routeProvider
         .when('/', {
-            templateUrl: 'assets/page/homeTemplate.html'
+            templateUrl: 'assets/template/page/homeTemplate.html'
         });
 });
