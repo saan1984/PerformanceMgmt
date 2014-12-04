@@ -4,6 +4,18 @@
 
 var performanceController = angular.module("perfApp.controller",[]);
 
+/*performanceController.run("$rootScope",function($rootScope){
+    $rootScope.user={
+        "userId":"I306335",
+        "userName":"Sandeep Kumar Patel"
+    };
+});*/
+
+performanceController.controller("HomeController",
+    ["$scope","$log","PerformanceService",
+        function($scope,$log,PerformanceService){
+}]);
+
 performanceController.controller("MainController",
     ["$scope","$modal","$log",function($scope,$modal,$log){
 
@@ -19,7 +31,6 @@ performanceController.controller("MainController",
 performanceController.controller('GoalInstanceCtrl', function ($scope, $modalInstance) {
 
     $scope.ok = function () {
-        console.log($scope.goalName);
         $modalInstance.close();
     };
     $scope.cancel = function () {
