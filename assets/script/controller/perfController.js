@@ -4,16 +4,21 @@
 
 var performanceController = angular.module("perfApp.controller",[]);
 
-/*performanceController.run("$rootScope",function($rootScope){
-    $rootScope.user={
-        "userId":"I306335",
-        "userName":"Sandeep Kumar Patel"
-    };
-});*/
-
 performanceController.controller("HomeController",
-    ["$scope","$log","PerformanceService",
-        function($scope,$log,PerformanceService){
+    ["$scope","$log","EmployeeService",
+        function($scope,$log,EmployeeService){
+            $scope.employee ={};
+
+           var ref= EmployeeService.getEmployeeDetailById("I000121");
+
+            ref.on("value", function(snapshot) {
+                $scope.$apply(function(){
+                    $scope.employee = snapshot.val();
+                });
+                $log.log("$scope.employee:11 " , $scope.employee);
+            }, function (errorObject) {
+                $log.log("The read failed: " , errorObject.code);
+            });
 }]);
 
 performanceController.controller("MainController",

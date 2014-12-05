@@ -1,11 +1,29 @@
-<div class="container-fluid">
+<div class="container-fluid" ng-controller="HomeController">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="media">
+                <a class="pull-left" href="#">
+                    <img class="profile-image"
+                         ng-src="http://www.gravatar.com/avatar/c6e6c57a2173fcbf2afdd5fe6786e92f.png?s=150">
+                </a>
+                <div class="media-body">
+                    <h2 class="media-heading">{{employee.Employeename}}</h2>
+                    <span>Employee Id:<strong>{{employee.Employeeid}}</strong></span>
+                    <span>Manager Id:<strong>{{employee.Managerid}}</strong></span>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-xs-3">
-            <button class="btn btn-warning btn-block" ng-click="createGoal()">
+            <button class="btn btn-warning btn-lg btn-block btn-action" ng-click="createGoal()">
                 Create Goal
             </button>
-            <button class="btn btn-warning btn-block">
+            <button class="btn btn-warning btn-lg btn-block btn-action">
                 Display Goal
+            </button>
+            <button class="btn btn-warning btn-lg btn-block btn-action">
+                Self Assessment
             </button>
         </div>
         <div class="col-xs-9">

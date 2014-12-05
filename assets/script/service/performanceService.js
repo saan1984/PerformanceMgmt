@@ -13,3 +13,13 @@ performanceService.factory("PerformanceService",
          };
        }
   ]);
+
+performanceService.factory("EmployeeService",
+  ["$firebase", function($firebase){
+      return{
+          getEmployeeDetailById : function(id){
+              return new Firebase("https://performancetool.firebaseio.com/"+id)
+          }
+      }
+    }
+  ]);
