@@ -1,4 +1,4 @@
-<nav class="navbar navbar-inverse" role="navigation">
+<nav class="navbar navbar-inverse" role="navigation" ng-controller="HeaderController">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -10,8 +10,9 @@
             </button>
             <a class="navbar-brand" href="#">Performance Management</a>
         </div>
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-9">
-        </div><!-- /.navbar-collapse -->
+        <button class="btn btn-md pull-right btn-logout" ng-show="loginClass" ng-click="doLogout()">
+            <span class="glyphicon glyphicon-off "></span><br>
+            Logout
+        </button>
     </div><!-- /.container-fluid -->
 </nav>

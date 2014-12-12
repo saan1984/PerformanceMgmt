@@ -14,8 +14,13 @@ var perfApp= angular.module("perfApp", [
 
 perfApp.config(function($routeProvider) {
     $routeProvider
-        .when('/', {
+        .when('/home', {
             templateUrl: 'assets/template/page/homeTemplate.html',
             controller:"HomeController"
         });
+    $routeProvider
+        .when('/', {
+                  templateUrl: 'assets/template/page/loginTemplate.html',
+                  controller:"HomeController"
+              });
 });

@@ -1,3 +1,27 @@
 <div class="card">
-    <input type="text" placeholder="Add new card.">
+    <div class="card-heading">
+        {{title}}
+    </div>
+    <div class="card-body">
+        <p>{{description}}</p>
+        <ul class="comment-list">
+            <li ng-repeat="aComment in comments">
+                {{aComment}}
+            </li>
+        </ul>
+        <form class="commentForm" ng-hide="commentFlag">
+            <textarea ng-model="comment" >
+            </textarea>
+            <button class="btn  btn-sm btn-info pull-right" ng-click="saveComment()">
+                <span class=" glyphicon glyphicon-floppy-disk">
+                </span><br/>Save
+            </button>
+         <form>
+    </div>
+    <div class="card-footer">
+        <button ng-click="doAddComment()">
+            <span class="glyphicon glyphicon-plus"></span><br>
+            Comment
+        </button>
+    </div>
 </div>

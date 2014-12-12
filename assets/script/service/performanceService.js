@@ -23,3 +23,26 @@ performanceService.factory("EmployeeService",
       }
     }
   ]);
+
+performanceService.factory("GoalService",
+   ["$firebase", function($firebase){
+    return{
+            getGoalById : function(id){
+                var ref= new Firebase("https://performancetool.firebaseio.com/"+id+"/Goals");
+                var sync = $firebase(ref);
+                return sync;
+            }
+        }
+    }
+ ]);
+performanceService.factory("CommentService",
+  ["$firebase", function($firebase){
+      return{
+          getCommentsByEmployeeId : function(id,index){
+              var ref= new Firebase("https://performancetool.firebaseio.com/"+id+"/Goals/"+index+"/Comment");
+              var sync = $firebase(ref);
+              return sync;
+            }
+          }
+    }
+  ]);

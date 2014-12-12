@@ -4,7 +4,7 @@
             <div class="media">
                 <a class="pull-left" href="#">
                     <img class="profile-image"
-                         ng-src="http://www.gravatar.com/avatar/c6e6c57a2173fcbf2afdd5fe6786e92f.png?s=150">
+                         ng-src="{{Image}}?s=150">
                 </a>
                 <div class="media-body">
                     <h2 class="media-heading">{{employee.Employeename}}</h2>
@@ -16,17 +16,19 @@
     </div>
     <div class="row">
         <div class="col-xs-3">
-            <button class="btn btn-warning btn-lg btn-block btn-action" ng-click="createGoal()">
-                Create Goal
-            </button>
-            <button class="btn btn-warning btn-lg btn-block btn-action">
-                Display Goal
-            </button>
-            <button class="btn btn-warning btn-lg btn-block btn-action">
-                Self Assessment
+            <button class="btn btn-default btn-lg btn-block btn-action" ng-click="createGoal()">
+                <span class="glyphicon glyphicon-plus"></span> Goal
             </button>
         </div>
         <div class="col-xs-9">
+            <div class="card-container">
+                <performance-card  ng-repeat="goal in employee.Goals"
+                                   title="{{goal.GoalTitle}}"
+                                   goalid="{{goal.Goalid}}"
+                                   comments="goal.Comment"
+                                  description="{{goal.Goaldescription}}">
+                </performance-card>
+            </div>
         </div>
     </div>
 </div>

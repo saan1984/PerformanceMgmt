@@ -5,25 +5,35 @@
 var performanceController = angular.module("perfApp.controller",[]);
 
 performanceController.controller("HomeController",
-    ["$scope","$log","EmployeeService",
-        function($scope,$log,EmployeeService){
+    ["$scope","$log","EmployeeService","$location", "$rootScope","$timeout",
+        function($scope,$log,EmployeeService,$location,$rootScope,$timeout){
             $scope.employee ={};
-
            var ref= EmployeeService.getEmployeeDetailById("I000121");
-
             ref.on("value", function(snapshot) {
-                $scope.$apply(function(){
+                $timeout(function(){
                     $scope.employee = snapshot.val();
                 });
-                $log.log("$scope.employee:11 " , $scope.employee);
             }, function (errorObject) {
                 $log.log("The read failed: " , errorObject.code);
             });
+
+            $scope.doLogin = function () {
+                $location.path("/home");
+                $rootScope.loginClass=true;
+            }
+
 }]);
+performanceController.controller("HeaderController",
+   ["$scope","$log","EmployeeService","$location","$rootScope", function($scope,$log,EmployeeService,$location,$rootScope){
+       $scope.doLogout = function () {
+           $rootScope.loginClass=false;
+           $location.path("/");
+       }
+   }]);
+
 
 performanceController.controller("MainController",
     ["$scope","$modal","$log",function($scope,$modal,$log){
-
     $scope.createGoal = function(){
         var modalInstance = $modal.open({
             templateUrl: 'goalModalContent.html',
@@ -33,12 +43,30 @@ performanceController.controller("MainController",
     }
 }]);
 
-performanceController.controller('GoalInstanceCtrl', function ($scope, $modalInstance) {
+performanceController.controller('GoalInstanceCtrl',
+    ["$scope", "$timeout","$modalInstance","GoalService","$log",
+    function ($scope, $timeout,$modalInstance,GoalService,$log) {
 
-    $scope.ok = function () {
-        $modalInstance.close();
+    $scope.ok = function ($event) {
+            var syncGoalArray = GoalService.getGoalById("I000121").$asArray();
+        $log.log("$scope.goalDescription",$scope.goalDescription)
+            var anewGoal = {
+                "GoalTitle":$scope.goalTitle,
+                "Goaldescription":$scope.goalDescription,
+                "Starttime":$scope.goalStartTime,
+                "Endtime":$scope.goalEndTime,
+                "Goalid": syncGoalArray.length+1,
+                "Rating": 0
+            };
+        $timeout(function(){
+            syncGoalArray.$add(anewGoal).then(function(){
+                $modalInstance.close();
+            });
+        },0);
     };
-    $scope.cancel = function () {
+    $scope.cancel = function ($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
         $modalInstance.dismiss('cancel');
     };
     $scope.openStartTime = function($event) {
@@ -51,4 +79,4 @@ performanceController.controller('GoalInstanceCtrl', function ($scope, $modalIns
         $event.stopPropagation();
         $scope.eopened = true;
     };
-});
+}]);
